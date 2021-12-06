@@ -1,3 +1,3 @@
 Pleshakov Sergei
 ____
-## Django Frameork. Базовый курс
+## Django Framework. Базовый курс
