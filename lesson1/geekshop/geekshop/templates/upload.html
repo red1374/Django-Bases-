@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div class="hero-white">
+		<div class="header clearfix">
+			<a href="{% url 'main' %}" class="logo"></a>
+			{% include 'includes/menu_inc.html' %}
+			<a href="#" class="search"></a>
+			<a href="#" class="basket"></a>
+		</div>
+	</div><br />
+	<div class="hero-white">
+		<p>Загружено записей из файла: <strong>{{ added }}</strong></p>
+		<p>Всего разделов продукции: <strong>{{ total }}</strong></p>
+	</div>
+{% endblock %}

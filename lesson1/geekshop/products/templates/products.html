@@ -18,10 +18,18 @@
 		<div class="details">
 			<div class="links clearfix">
 				<ul class="links-menu">
+					<li>
+						<a href="{% url 'products:index' %}"
+						   class="{% if request.resolver_match.view_name == 'products:index' %}
+									active
+								  {% endif %}">
+							все
+						</a>
+					</li>
 				{% for link in links_menu %}
 					<li>
-						<a href="{{ link.href }}"
-						   class="{% if request.resolver_match.route == link.href %}
+						<a href="{% url 'products:index' %}{{ link.id }}/"
+						   class="{% if request.resolver_match.view_name == 'products:category' and request.resolver_match.kwargs.pk == link.id %}
 									active
 								  {% endif %}">
 							{{ link.name }}
@@ -82,11 +90,14 @@
 					{% for item in other_products %}
 					<div class="block">
 						<a href="#">
-							<img src="{% static item.image %}" alt="">
+							<img src="/media/{{ item.image }}" alt="{{ item.name }}">
 							<div class="text">
 								<img src="{% static '/geekshop/img/icon-hover.png' %}" alt="img">
+								<h3>{{ item.category.name }}</h3>
 								<h4>{{ item.name }}</h4>
+								{% if item.description %}
 								<p>{{ item.description }}</p>
+								{% endif %}
 							</div>
 						</a>
 					</div>

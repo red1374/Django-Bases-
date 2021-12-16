@@ -1,8 +1,8 @@
 import json
 
 from django.shortcuts import render
-
-from geekshop.views import getTopMenu
+from geekshop.views import getFileData
+from .models import ProductCategory, Product
 
 
 def getOtherProducts():
@@ -12,18 +12,14 @@ def getOtherProducts():
     return data
 
 
-def products(request):
-    links_menu = [
-        {'href': 'products/', 'name': 'все'},
-        {'href': 'products_home', 'name': 'дом'},
-        {'href': 'products_office', 'name': 'офис'},
-        {'href': 'products_modern', 'name': 'модерн'},
-        {'href': 'products_classic', 'name': 'классика'},
-    ]
+def products(request, pk=None):
+    print(pk)
+
     content = {
         'title': 'продукты',
-        'links_menu': links_menu,
-        'menu_items': getTopMenu(),
-        'other_products': getOtherProducts()
+        'links_menu': ProductCategory.objects.all(),
+        'menu_items': getFileData('menu_items.json'),
+        # 'other_products': getOtherProducts()
+        'other_products': Product.objects.all()[:3]
     }
     return render(request, 'products.html', context=content)

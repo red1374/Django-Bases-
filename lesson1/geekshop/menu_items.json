@@ -2,7 +2,7 @@
     "name": "main",
     "title": "домой"
 },{
-    "name": "products",
+    "name": "products:index",
     "title": "продукты"
 },{
     "name": "contacts",
