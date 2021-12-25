@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>
+        {% block title %}
+            {{ title|title }}
+        {% endblock %}
+    </title>
+    {% block css %}
+        <link rel="stylesheet" type="text/css" href="{% static '/geekshop/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/authapp/css/style.css' %}">
+        <link rel="stylesheet" href="{% static '/geekshop/css/font-awesome.min.css' %}">
+    {% endblock %}
+    {% block js %}
+
+    {% endblock %}
+</head>
+<body>
+	<div class="container">
+        <div class="login">
+            <div class="modal d-block">
+                <div class="modal-dialog modal-dialog-centered modal-lg mw-350">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title m-auto">{{ title|title }}</h2>
+                        </div>
+                        <div class="modal-body">
+                            {% block content %}
+                            {% endblock %}
+                        </div>
+                        {% block modal_footer %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</body>
+</html>
