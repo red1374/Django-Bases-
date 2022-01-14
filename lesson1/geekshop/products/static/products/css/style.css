@@ -37,8 +37,8 @@
 }
 
 .details-products {
-	padding-left: 98px;
-	padding-right: 98px;
+	padding-left: 70px;
+	padding-right: 70px;
 	margin-top: 98px;
 	height: 651px;
 }
@@ -168,16 +168,16 @@
 .related .title .explore {
 	margin-top: 262px;
 }
-.related-products {
+.related-products, .category-products {
 	margin-bottom: 120px;
 }
-.related-products .block a img {
+.related-products .block a img, .category-products .block a img {
 	float: left;
 }
-.related-products .block a > img {
+.related-products .block a > img, .category-products .block a > img {
     width: 100%;
 }
-.related-products .block {
+.related-products .block, .category-products .block {
 	float: left;
 	margin-right: 30px;
 	display: block;
@@ -185,10 +185,10 @@
 	width: 370px;
 	position: relative;
 }
-.related-products .block:nth-child(3n) {
+.related-products .block:nth-child(3n), .category-products .block:nth-child(3n) {
 	margin-right: 0px;
 }
-.related-products a .text {
+.related-products a .text, .category-products a .text {
 	display: none;
 	height: 368px;
 	width: 368px;
@@ -199,24 +199,24 @@
     text-align: center;
     border: 1px solid #9c9c9c;
 }
-.related-products a .text h4 {
+.related-products a .text h4, .category-products a .text h4 {
 	color:  #212121;
 	font-size: 30px;
 	font-weight: 700;
 	line-height: 30px;
 	text-align: center;
 }
-.related-products a .text p {
+.related-products a .text p, .category-products a .text p {
 	color:  #6c6c6c;
 	font-size: 20px;
 	font-weight: 300;
 	text-align: center;
 	margin: 15px 15px;
 }
-.related-products a .text img {
+.related-products a .text img, .category-products a .text img {
 	float: none;
 	margin-top: 80px;
 }
-.related-products a:hover .text{
+.related-products a:hover .text, .category-products a:hover .text{
 	display: block;
 }

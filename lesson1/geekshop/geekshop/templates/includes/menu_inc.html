@@ -1,3 +1,8 @@
+{% if request.resolver_match.view_name == 'main' %}
+<span href="{% url 'main' %}" class="logo"></span>
+{% else %}
+<a href="{% url 'main' %}" class="logo"></a>
+{% endif %}
 <ul class="menu">
     {% for item in menu_items %}
     <li><a {% if item.name == request.resolver_match.view_name %}class="active" {% endif %}href="{% url item.name %}">{{ item.title }}</a></li>
@@ -18,3 +23,9 @@
         {% endif %}
     </li>
 </ul>
+<a href="#" class="search"></a>
+<a href="{% url 'basket:view' %}" class="basket">
+    <span>
+        {% if basket %} {{ basket.qty }} шт.<br> {{ basket.sum }}р.{% endif %}
+    </span>
+</a>

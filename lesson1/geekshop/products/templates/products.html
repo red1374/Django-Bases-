@@ -8,34 +8,13 @@
 {% block content %}
 		<div class="hero-white">
 			<div class="header clearfix">
-				<a href="{% url 'main' %}" class="logo"></a>
 				{% include 'includes/menu_inc.html' %}
-				<a href="#" class="search"></a>
-                <a href="#" class="basket"></a>
 			</div>
 		</div>
 
 		<div class="details">
 			<div class="links clearfix">
-				<ul class="links-menu">
-					<li>
-						<a href="{% url 'products:index' %}"
-						   class="{% if request.resolver_match.view_name == 'products:index' %}
-									active
-								  {% endif %}">
-							все
-						</a>
-					</li>
-				{% for link in links_menu %}
-					<li>
-						<a href="{% url 'products:index' %}{{ link.id }}/"
-						   class="{% if request.resolver_match.view_name == 'products:category' and request.resolver_match.kwargs.pk == link.id %}
-									active
-								  {% endif %}">
-							{{ link.name }}
-						</a>
-					</li>
-				{% endfor %}
+				 {% include 'includes/inc_categories_menu.html' %}
 				</ul>
 			</div>
 
