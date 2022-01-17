@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from products.models import Product
 
+
 class Basket(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='basket')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -9,7 +10,28 @@ class Basket(models.Model):
     add_datetime = models.DateTimeField(verbose_name='время', auto_now_add=True)
 
     def get_item_total(self):
-        return {
-            'qty': self.quantity,
-            'sum': self.quantity * self.product.price
-        }
+        """
+        Get basket item total cost
+        :return: item cost
+        """
+        return self.quantity * self.product.price
+
+    @property
+    def total(self):
+        """
+        return total quantity for user
+        :return:
+        """
+        _items = Basket.objects.filter(user=self.user)
+        _totalquantity = sum(list(map(lambda x: x.quantity, _items)))
+        return _totalquantity
+
+    @property
+    def total_cost(self):
+        """
+        return total cost for user
+        :return:
+        """
+        _items = Basket.objects.filter(user=self.user)
+        _totalcost = sum(list(map(lambda x: x.product_cost, _items)))
+        return _totalcost

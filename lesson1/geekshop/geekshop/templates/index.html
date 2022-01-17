@@ -18,30 +18,28 @@
 
 		<div class="featured">
 			<div class="featured-menu">
-					<a class="active" href="#">Популярные</a><a href="#">Новинки</a>
+				<a class="active" href="#tab1">Популярные</a><a href="#tab2">Новинки</a>
 			</div>
 			<a class="explore" href="#">показать все <img src="{% static '/geekshop/img/arrow.png' %}" alt=""></a>
 			<div class="clearfix">
 			</div>
 			<div class="tab-content">
-				<div class="block">
-					<a href="#"><img src="{% static '/geekshop/img/product-1.jpg' %}" alt="">
-						<div class="text">
-							<img src="{% static '/geekshop/img/icon-hover.png' %}" alt="img">
-							<h4>Отличный стул</h4>
-							<p>Расположитесь комфортно. </p>
-						</div>
-					</a>
-				</div>
-				<div class="block">
-					<a href="#"><img src="{% static '/geekshop/img/product-2.jpg' %}" alt="">
-						<div class="text">
-							<img src="{% static '/geekshop/img/icon-hover.png' %}" alt="">
-							<h4>Стул повышенного качества</h4>
-							<p>Не оторваться. </p>
-						</div>
-					</a>
+			{% if new_products %}
+				<div id="tab1" class="d-flex">
+					{% for product in new_products %}
+					<div class="block d-flex justify-content-around align-items-center">
+						<a class="product-item" href="{% url 'products:product' product.pk %}" title="{{ product.name }}">
+							<img src="/media/{{ product.image }}" alt="{{ product.name }}">
+							<div class="text">
+								<img src="{% static '/geekshop/img/icon-hover.png' %}" alt="img">
+								<h4>{{ product.name }}</h4>
+								<p>{{ product.short_desc }}</p>
+							</div>
+						</a>
+					</div>
+					{% endfor %}
 				</div>
 			</div>
+			{% endif %}
 		</div>
 {% endblock %}

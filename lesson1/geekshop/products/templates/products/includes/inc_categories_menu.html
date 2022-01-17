@@ -4,7 +4,7 @@
             {% if request.resolver_match.kwargs.pk == 0 %} class="active"{% endif %}>все
         </a>
     </li>
-    {% for link in links_menu %}
+    {% for link in catalog_menu %}
     <li>
         <a href="{% url 'products:category' link.pk %}"
         {% if request.resolver_match.kwargs.pk|add:'0' == link.pk %} class="active"{% endif %}>

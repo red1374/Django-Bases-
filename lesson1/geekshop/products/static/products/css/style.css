@@ -50,7 +50,9 @@
 .slider-product {
 	width: 570px;
 	height: 570px;
+	text-align: center;
 }
+.slider-product img{width: 80%;}
 .slider-control {
 	width: 420px;
 	height: 70px;

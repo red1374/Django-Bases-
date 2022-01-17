@@ -12,7 +12,7 @@
 		</div>
         <div class="details">
             <div class="links clearfix">
-                {% include 'includes/inc_categories_menu.html' %}
+                {% include 'products/includes/inc_categories_menu.html' %}
             </div>
 
             <div class="products_list">
@@ -23,7 +23,7 @@
                 <div class="category-products clearfix">
                     {% for product in products %}
                     <div class="block">
-                        <a href="{% url 'basket:add' product.pk %}" title="{{ product.name }}">
+                        <a href="{% url 'products:product' product.pk %}" title="{{ product.name }}">
                             <img src="/media/{{ product.image }}" alt="{{ product.name }}">
 							<div class="text">
 								<img src="{% static '/geekshop/img/icon-hover.png' %}" alt="{{ product.name }}">

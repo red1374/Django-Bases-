@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block morecss %}
+<link rel="stylesheet" href="{% static '/products/css/style.css' %}">
+{% endblock %}
+
+
+{% block content %}
+		<div class="hero-white">
+			<div class="header clearfix">
+				{% include 'includes/menu_inc.html' %}
+			</div>
+		</div>
+
+		<div class="details">
+			<div class="links clearfix">
+				 {% include 'products/includes/inc_categories_menu.html' %}
+				</ul>
+			</div>
+
+			<div class="details-products">
+				<div class="details-slider">
+					<div class="slider-product">
+						<img src="/media/{{ product.image }}">
+					</div>
+					<!-- <div class="slider-control">
+						<div class="block">
+							<a href="#"><img src="{% static '/products/img/controll.jpg' %}" alt="">
+								<div class="text"></div>
+							</a>
+						</div>
+						<div class="block">
+							<a href="#"><img src="{% static '/products/img/controll1.jpg' %}" alt="">
+								<div class="text"></div>
+							</a>
+						</div>
+						<div class="block">
+							<a href="#"><img src="{% static '/products/img/controll2.jpg' %}" alt="">
+								<div class="text"></div>
+							</a>
+						</div>
+					</div> -->
+				</div>
+
+				<div class="description">
+					<h3 class="big-bold">{{ product.name }}</h3>
+					<h3 class="red">{{ product.short_desc }}</h3>
+					<p class="price">{{ product.price|floatformat:'0' }}<span>руб</span></p>
+					<a class="red-button" href="{% url 'basket:add' product.pk %}" title="{{ product.name }}">
+						заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
+					</a>
+					<div class="description-text">
+						{{ product.description }}
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

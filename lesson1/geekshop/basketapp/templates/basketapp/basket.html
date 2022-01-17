@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block morecss %}
+<link rel="stylesheet" href="{% static '/basketapp/css/style.css' %}">
+{% endblock %}
+{% block js %}
+    <script src="{% static '/geekshop/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static '/basketapp/js/scripts.js' %}"></script>
+{% endblock %}
+{% block content %}
+		<div class="hero-white">
+			<div class="header clearfix">
+				{% include 'includes/menu_inc.html' %}
+			</div>
+		</div>
+	<div class="basket_container">
+		<div class="h2 text-center head">
+		  Ваша корзина,
+		  {% if user.first_name %}
+			<strong>{{ user.first_name|title}}</strong>
+		  {% else %}
+			Пользователь
+		  {% endif %}
+		</div>
+		{% if basket_items %}
+		<div class="basket_list">
+			{% include 'basketapp/includes/inc_basket_list.html' %}
+		</div>
+		<div class="basket-total d-flex justify-content-between pb-5">
+			<div>
+				<a class="btn btn-round btn-outline-primary" href="{% url 'main' %}">на главную</a>
+			</div>
+			{% if total %}
+			<div class="basket_summary">
+				В корзине <strong>{{ total.qty }}</strong> товаров общей стоимостью
+				<strong>{{ total.sum|floatformat:'0' }}</strong> руб
+			</div>
+			{% endif %}
+		</div>
+		{% else %}
+		<p class="pt-5 pb-5">В корзине пусто. Пора приступить к <a href="{% url 'products:index'%}" title="Наполнить корзину">покупкам</a></p>
+		{% endif %}
+  	</div>
+{% endblock %}

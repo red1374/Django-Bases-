@@ -4,6 +4,8 @@ from django.shortcuts import render
 from products.models import TestModel
 from datetime import datetime
 
+from products.models import Product
+
 
 def getFileData(file_name=''):
     if not file_name:
@@ -16,8 +18,10 @@ def getFileData(file_name=''):
 
 
 def index(request):
+    new_products = Product.objects.order_by('?')[2:6]
     content = {
         'title': 'главная',
+        'new_products': new_products,
         'menu_items': getFileData('menu_items.json')
     }
     return render(request, 'index.html', context=content)
