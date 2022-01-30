@@ -79,7 +79,7 @@ html, body {
 	background-image: url(/static/geekshop/img/search.png);
 	position: absolute;
 	top: 63px;
-	right: 130px;
+	right: -150px;
 }
 .basket {
     width: 123px;
@@ -87,7 +87,7 @@ html, body {
 	background: transparent url('/static/geekshop/img/basket.png') no-repeat left top;
 	position: absolute;
 	top: 63px;
-	right: 4px;
+	right: -130px;
 	padding-left: 33px;
 	text-decoration: none;
     font-weight: 700;
@@ -865,3 +865,9 @@ td:first-child {
 
 .product-item{width: 100%; text-align: center;}
     .product-item > img{max-width: 90%;}
+
+.header{position: relative;}
+    .header .admin_link{position: absolute; top: 5px; right: 0px;
+        display: inline-block; color: blue; padding: 10px 13px;
+        font-weight: bold; text-decoration: none;}
+    .header .admin_link:hover{border-bottom: 2px solid blue;}

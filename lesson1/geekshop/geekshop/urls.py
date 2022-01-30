@@ -22,6 +22,7 @@ from .views import index, contacts, uploadToBase
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin_staff/', include('adminapp.urls', namespace='admin_staff')),
     path('', index, name='main'),
     path('contacts/', contacts, name='contacts'),
     path('upload/', uploadToBase, name='upload'),
