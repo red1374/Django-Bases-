@@ -147,6 +147,25 @@ a {
     height: 100vh
 }
 
+.deleted-item{
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+    .deleted-item .delete-item-link{display: none;}
+
+.breadcrumbs{
+    marginL 0px;
+    padding: 0px;}
+.breadcrumbs li{
+    display: inline-block;
+    margin-right: 2px;}
+.breadcrumbs li:after{
+    content: "→";
+    display: block;
+    float: right;
+    margin-left: 3px;
+}
+.breadcrumbs li:last-child:after{display:none;}
 @media screen and (min-width: 768px) {
     body {
         margin: calc(var(--header-height) + 1rem) 0 0 0;

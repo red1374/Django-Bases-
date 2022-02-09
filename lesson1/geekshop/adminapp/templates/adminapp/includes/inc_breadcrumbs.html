@@ -1,0 +1,14 @@
+<div class="card-header">
+    <nav>
+        <ul class="breadcrumbs">
+            {% for item in breadcrumbs %}
+            <li>
+                <a href="{{ item.link }}" title="{{ item.title}}">{{ item.title}}</a>
+            </li>
+            {% endfor %}
+            <li>
+                <span>{{ title }}</span>
+            </li>
+        </ul>
+    </nav>
+</div>

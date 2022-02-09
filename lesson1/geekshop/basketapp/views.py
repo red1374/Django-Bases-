@@ -1,13 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
-from basketapp.models import Basket
 from django.urls import reverse
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
+
+from basketapp.models import Basket
 from products.models import Product
 
 from geekshop.views import getFileData
 
-from geekshop.utils import is_ajax
+from geekshop.utils import is_ajax, get_price_formated
 
 
 @login_required
@@ -68,7 +69,7 @@ def get_total(request):
 
     return {
         'qty': qty,
-        'sum': int(sum)
+        'sum': get_price_formated(int(sum))
     }
 
 
@@ -85,7 +86,7 @@ def edit(request, pk, quantity):
                 'status': 'error',
                 'basket_item': {
                     'id': int(pk),
-                    'cost': cost
+                    'cost': get_price_formated(cost)
                 },
             })
 
@@ -99,7 +100,7 @@ def edit(request, pk, quantity):
         result = {
             'basket_item': {
                 'id': int(pk),
-                'cost': cost
+                'cost': get_price_formated(cost)
             },
             'itog': get_total(request),
         }
