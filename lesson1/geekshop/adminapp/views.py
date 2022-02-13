@@ -334,23 +334,6 @@ class ProductDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('admin_staff:products', args=[self.object.category.pk])
 
-@user_passes_test(lambda u: u.is_superuser)
-def product_delete(request, pk):
-    title = 'удаление'
-
-    product = get_object_or_404(Product, pk=pk)
-
-    if request.method == 'POST':
-        product.is_active = False
-        product.save()
-        return HttpResponseRedirect(reverse('admin_staff:products', args=[product.category.pk]))
-
-    context = {
-        'title': title,
-        'product': product,
-    }
-
-    return render(request, 'adminapp/product_delete.html', context=context)
 
 class ProductDetailView(DetailView):
     model = Product
