@@ -1,4 +1,10 @@
-from geekshop.utils import get_price_formated
+from geekshop.utils import get_price_format, get_file_data
+
+
+def top_menu(request):
+    return {
+        'menu_items': get_file_data('menu_items.json')
+    }
 
 
 def basket(request):
@@ -15,6 +21,6 @@ def basket(request):
     return {
         'basket': {
             'qty': qty,
-            'sum': get_price_formated(int(sum))
+            'sum': get_price_format(int(sum))
         }
     }

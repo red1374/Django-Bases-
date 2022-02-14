@@ -2,7 +2,6 @@
 
 from django.shortcuts import render, get_object_or_404
 from .models import ProductCategory, Product
-from geekshop.views import getFileData
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -30,7 +29,6 @@ def get_catalog_menu():
 
 def products(request, pk=None, page=1):
     title = 'продукты'
-    menu_items = getFileData('menu_items.json')
     page_size = 3
 
     if pk is not None:
@@ -54,7 +52,6 @@ def products(request, pk=None, page=1):
         content = {
             'title': title,
             'catalog_menu': get_catalog_menu(),
-            'menu_items': menu_items,
             'category': category,
             'products': products_paginator,
         }
@@ -67,7 +64,6 @@ def products(request, pk=None, page=1):
     content = {
         'title': title,
         'catalog_menu': get_catalog_menu(),
-        'menu_items': menu_items,
         'hot_product': hot_product,
         'same_products': same_products,
     }
@@ -77,13 +73,11 @@ def products(request, pk=None, page=1):
 
 def product(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    menu_items = getFileData('menu_items.json')
 
     content = {
         'title': product.name,
         'catalog_menu': get_catalog_menu(),
         'product': product,
-        'menu_items': menu_items,
     }
 
     return render(request, 'products/product.html', content)

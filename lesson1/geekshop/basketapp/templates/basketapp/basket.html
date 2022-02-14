@@ -34,7 +34,7 @@
 			{% if total %}
 			<div class="basket_summary">
 				В корзине <strong>{{ total.qty }}</strong> товаров общей стоимостью
-				<strong>{{ total.sum|formated }}</strong> руб
+				<strong>{{ total.sum|price_format }}</strong> руб
 			</div>
 			{% endif %}
 		</div>
