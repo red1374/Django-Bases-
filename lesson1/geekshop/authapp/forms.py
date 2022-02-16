@@ -2,13 +2,12 @@ import hashlib
 import random
 import re
 
+from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.forms import HiddenInput, ValidationError
 from django.core.validators import validate_email
 
-from .models import ShopUser
-# import gettext
-# _ = gettext.gettext
+from .models import ShopUser, ShopUserProfile
 
 
 class ShopUserLoginForm(AuthenticationForm):
@@ -81,8 +80,19 @@ class ShopUserEditForm(UserChangeForm):
     def clean_username(self):
         data = self.cleaned_data['username']
 
-        pattern = re.compile('^[a-zA-Z]+$')
+        pattern = re.compile('^[a-zA-Z_]+$')
         if not pattern.match(data):
-            raise ValidationError("Допустимы только латинские символы", code='username')
+            raise ValidationError("Допустимы только латинские символы и символь '_'", code='username')
 
         return data
+
+
+class ShopUserProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = ShopUserProfile
+        fields = ('tagline', 'aboutMe', 'gender', 'vk_url')
+
+    def __init__(self, *args, **kwargs):
+        super(ShopUserProfileEditForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
