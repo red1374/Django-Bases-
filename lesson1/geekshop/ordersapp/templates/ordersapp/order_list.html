@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="hero-white">
+        <div class="header clearfix">
+            {% include 'includes/menu_inc.html' %}
+        </div>
+    </div>
+    <div class="h2 text-center head mb-5 mt-5">
+        Ваши заказы,
+        {% if user.first_name %}
+        <strong>{{ user.first_name|title|default:'Пользователь'}}</strong>
+        {% endif %}
+    </div>
+    {% if object_list %}
+    <table class="table orders_list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Создан</th>
+                <th>Обновлен</th>
+                <th>Статус</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+                {% if item.is_active %}
+                <tr>
+                    <td class="td1 orders_list">{{ item.pk }}</td>
+                    <td>{{ item.created|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ item.updated|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ item.get_status_display }}</td>
+                    <td>
+                        <a href="{% url 'ordersapp:order_read' item.pk %}">посмотреть</a>
+                    </td>
+                    <td>
+                        {% if item.status == 'FM' %}
+                        <a href="{% url 'ordersapp:order_update' item.pk %}">редактировать</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.status == 'FM' %}
+                        <a href="{% url 'ordersapp:order_delete' item.pk %}">удалить</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-warning">Список заказов пуст</div>
+    {% endif %}
+    <div class="clearfix mt-3"></div>
+    <a class="btn btn-round btn-outline-primary" href="{% url 'main' %}">на главную</a>
+    <a class="btn btn-success btn-round" href="{% url 'ordersapp:order_create' %}">новый</a>
+    <div class="clearfix mt-5"></div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="hero-white">
+        <div class="header clearfix">
+            {% include 'includes/menu_inc.html' %}
+        </div>
+    </div>
+    <div class="clearfix mt-5"></div>
+    <div class="category_delete">
+        <div class="h1">Уверены, что хотите удалить заказ <strong>№{{ object.pk }}</strong>?</div>
+        {% include 'ordersapp/includes/inc_order_summary.html' %}
+        <form action="{% url 'orders:order_delete' object.pk %}" method="post">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="удалить"> /
+            <a class="btn btn-round btn-outline-primary" href="{% url 'orders:orders_list' %}">Отмена</a>
+        </form>
+    </div>
+    <div class="clearfix mb-5"></div>
+{% endblock %}
