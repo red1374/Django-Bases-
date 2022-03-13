@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
+{% load utils %}
 
 {% block js %}
-    <script src="{% static 'ordersapp/js/orders_scripts.js' %}"></script>
+    <script src="{% static 'ordersapp/js/script.js' %}"></script>
     <script src="{% static 'ordersapp/js/jquery.formset.js' %}"></script>
 {% endblock %}
 
@@ -32,15 +33,15 @@
                                 {{ orderitems.management_form }}
                                 {% for form in orderitems.forms %}
                                     {% if forloop.first %}
-                                        <thead>
-                                        <tr class="formset_row">
-                                           {% for field in form.visible_fields %}
+                                    <thead>
+                                        <tr>
+                                            {% for field in form.visible_fields %}
                                                 <th class="{% cycle 'td1' 'td2' 'td3' %} order formset_td">
                                                     {{ field.label|capfirst }}
                                                 </th>
-                                           {% endfor %}
+                                            {% endfor %}
                                         </tr>
-                                        </thead>
+                                    </thead>
                                     {% endif %}
                                     <tr class="formset_row">
                                     {% for field in form.visible_fields %}
@@ -51,14 +52,14 @@
                                                 {% endfor %}
                                             {% endif %}
                                             {{ field.errors.as_ul }}
-                                        {% if field.name != 'price' %}
-                                            {{ field }}
-                                        {% else %}
+                                        {% if field.name == 'price' or  field.name == 'summ' %}
                                             {% if field.value %}
-                                                <span class="orderitems-{{ forloop.parentloop.counter0 }}-price">
-                                                    {{ field.value }}
+                                                <span class="field-{{ field.name }} orderitems-{{ forloop.parentloop.counter0 }}-{{ field.name }}" data-value="{{ field.value }}">
+                                                    {{ field.value|price_format }}
                                                 </span> руб
                                             {% endif %}
+                                        {% else %}
+                                            {{ field }}
                                         {% endif %}
                                         </td>
                                     {% endfor %}

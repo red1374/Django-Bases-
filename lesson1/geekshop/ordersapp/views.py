@@ -84,6 +84,7 @@ class OrderUpdate(UpdateView):
             for form in formset.forms:
                 if form.instance.pk:
                     form.initial['price'] = form.instance.product.price
+                    form.initial['summ'] = form.instance.get_product_cost()
         context['orderitems'] = formset
 
         return context

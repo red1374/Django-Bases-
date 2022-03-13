@@ -25,6 +25,7 @@ class CBasket {
                 }else{
                     $(`.basket_record[data-id=${data.basket_item.id}] .product_cost .value`).
                         text(data.basket_item.cost);
+                    $(`.basket_record[data-id=${data.basket_item.id}] input`).val(data.basket_item.qty);
                 }
                 if (data.itog != undefined && data.itog.qty > 0){
                     $('.basket_summary strong:eq(0)').text(data.itog.qty);
