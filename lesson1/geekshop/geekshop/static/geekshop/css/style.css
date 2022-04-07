@@ -862,3 +862,6 @@ td:first-child {
 .details, .links, .details-products, .details-slider, .description{
     box-sizing: initial;
 }
+
+.product-item{width: 100%; text-align: center;}
+    .product-item > img{max-width: 90%;}

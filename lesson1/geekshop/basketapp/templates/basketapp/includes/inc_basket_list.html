@@ -1,0 +1,29 @@
+            {% for item in basket_items %}
+			<div class="basket_record d-flex" data-id="{{ item.pk }}">
+				<div class="product-img">
+					<img src="/media/{{ item.product.image }}"
+						alt="{{ item.product.name }}">
+				</div>
+				<div class="basket-name vertical-center">
+					<span class="product_name">{{ item.product.name }}</span>
+					<span class="category_name">{{ item.product.category.name }}</span>
+				</div>
+				<div class="product_price vertical-center">
+					<span>{{ item.product.price }}&nbsp;руб</span>
+				</div>
+				<div class="basket-quantity vertical-center">
+					<span>
+						<input type="number" name="quantity[{{ item.pk }}]" min="0"
+					   		value="{{ item.quantity }}">
+					</span>
+				</div>
+				<div class="product_cost vertical-center">
+					<div><span class="value">{{ item.get_item_total }}</span>&nbsp;руб</div>
+				</div>
+				<div class="basket-options vertical-center">
+					<span>
+						<a class="btn btn-round btn-warning" href="{% url 'basket:remove' item.pk %}" class="">удалить</a>
+					</span>
+				</div>
+			</div>
+			{% endfor %}

@@ -1,0 +1,11 @@
+.basket_list{padding: 40px 0px; }
+.basket_record{padding-bottom: 20px; justify-content: space-between;}
+.vertical-center{display: flex; flex-direction: column; justify-content: center;}
+.product-img{width: 20%; text-align: center;}
+    .product-img img{max-width: 50%; width: auto;}
+.basket-name{width: 35%;}
+.category_name{font-size: 14px; color: #bbb;}
+.product_price, .product_cost, .basket-options{width: 10%;}
+.basket-quantity{width: 5%;}
+    .basket-quantity input{width: 80%; text-align: center;}
+.basket_summary{font-size: 19px; padding: 10px 0px 0px 20px; border-top: 2px solid black;}
