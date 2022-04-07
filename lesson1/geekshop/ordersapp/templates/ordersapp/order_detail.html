@@ -2,6 +2,10 @@
 {% load static %}
 {% load utils %}
 
+{% block morecss %}
+<link rel="stylesheet" type="text/css" href="{% static 'ordersapp/css/style.css' %}">
+{% endblock %}
+
 {% block content %}
     <div class="hero-white">
         <div class="header clearfix">
@@ -12,9 +16,10 @@
     {% include 'ordersapp/includes/inc_order_summary.html' %}
     <div class="basket_list">
        {% for item in object.orderitems.select_related %}
-           <div class="basket_record">
-                <img src="{{ item.product.image|media_folder_products }}"
-                    alt="{{ item.product.short_desc }}">
+           <div class="basket_record d-flex justify-content-between align-items-center">
+                <div class="basket-image-wrapper">
+                    <img src="{{ item.product.image|media_folder_products }}" alt="{{ item.product.short_desc }}">
+                </div>
                 <span class="category_name">
                    {{ item.product.category.name }}
                 </span>

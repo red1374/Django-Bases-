@@ -1,0 +1,9 @@
+.basket_record{
+    padding-bottom: 15px;
+}
+    .basket-image-wrapper{
+        width: 120px; height: 120px;
+    }
+        .basket-image-wrapper img{
+            max-width: 100%;
+        }

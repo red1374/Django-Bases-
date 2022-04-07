@@ -868,7 +868,5 @@ td:first-child {
     .product-item > img{max-width: 90%;}
 
 .header{position: relative;}
-    .header .admin_link{position: absolute; top: 5px; right: 0px;
-        display: inline-block; color: blue; padding: 10px 13px;
-        font-weight: bold; text-decoration: none;}
+    .header .admin_link{color: blue;}
     .header .admin_link:hover{border-bottom: 2px solid blue;}

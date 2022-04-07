@@ -35,8 +35,9 @@ def add(request, pk=None):
     if not basket:
         basket = Basket(user=request.user, product=product)
 
-    basket.quantity += 1
-    basket.save()
+    if product.quantity > 0:
+        basket.quantity += 1
+        basket.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -77,29 +78,34 @@ def edit(request, pk, quantity):
         basket_item = Basket.objects.filter(pk=int(pk)).first()
         cost = 0
 
+        result = {
+            'status': 'error',
+            'basket_item': {
+                'id': int(pk),
+                'cost': 0,
+                'qty': quantity
+            },
+            'itog': {},
+        }
+
         if basket_item is None:
-            return JsonResponse({
-                'status': 'error',
-                'basket_item': {
-                    'id': int(pk),
-                    'cost': get_price_format(cost)
-                },
-            })
+            result['basket_item']['qty'] = 0
+            return JsonResponse(result)
 
         if quantity > 0:
-            basket_item.quantity = quantity
+            if basket_item.quantity + basket_item.product.quantity >= quantity:
+                basket_item.quantity = quantity
+            else:
+                result['basket_item']['qty'] = basket_item.quantity
             basket_item.save()
+
             cost = int(basket_item.get_item_total())
+            result['basket_item']['cost'] = get_price_format(cost)
         else:
             basket_item.delete()
 
-        result = {
-            'basket_item': {
-                'id': int(pk),
-                'cost': get_price_format(cost)
-            },
-            'itog': get_total(request),
-        }
+        result['itog'] = get_total(request)
+        result['status'] = 'success'
 
         # result = render_to_string('basketapp/includes/inc_basket_list.html', content)
 
