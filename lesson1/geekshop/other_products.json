@@ -1,0 +1,13 @@
+[{
+    "name": "Зебро лампа",
+    "description": "Лампа дневного света",
+    "image": "products/img/product-11.jpg"
+},{
+    "name": "Стул повышенного качества",
+    "description": "Не оторваться.",
+    "image": "products/img/product-21.jpg"
+},{
+    "name": "Черная лампа",
+    "description": "Стильная черная лампа",
+    "image": "products/img/product-31.jpg"
+}]
