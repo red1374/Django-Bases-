@@ -1,20 +1,10 @@
-import json
-
 from django.shortcuts import render
 from products.models import TestModel
 from datetime import datetime
 
 from products.models import Product
 
-
-def getFileData(file_name=''):
-    if not file_name:
-        return False
-
-    with open(file_name) as data_file:
-        data = json.load(data_file)
-
-    return data
+from geekshop.utils import get_file_data
 
 
 def index(request):
@@ -22,7 +12,6 @@ def index(request):
     content = {
         'title': 'главная',
         'new_products': new_products,
-        'menu_items': getFileData('menu_items.json')
     }
     return render(request, 'index.html', context=content)
 
@@ -30,13 +19,12 @@ def index(request):
 def contacts(request):
     content = {
         'title': 'контакты',
-        'menu_items': getFileData('menu_items.json')
     }
     return render(request, 'contacts.html', context=content)
 
 
-def uploadToBase(request):
-    categories = getFileData('new_product_sections.json')
+def upload_to_base(request):
+    categories = get_file_data('new_product_sections.json')
     for item in categories:
         name = item['name'] + ' (' + str(datetime.now()) + ')'
         category = TestModel(name=name, description=item['description'])

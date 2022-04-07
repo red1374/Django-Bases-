@@ -15,7 +15,7 @@
         <li class="list-group-item"><strong>Активен:</strong> {% if object.is_active %}Да{% else %}Нет{% endif %}</li>
         <li class="list-group-item"><strong>Раздел:</strong> {{ object.category.name }}</li>
         <li class="list-group-item"><strong>Кол-во:</strong> {{ object.quantity }} шт.</li>
-        <li class="list-group-item"><strong>Цена:</strong> {{ object.price|formated }} руб.</li>
+        <li class="list-group-item"><strong>Цена:</strong> {{ object.price|price_format }} руб.</li>
     </ul>
     <div class="card-body">
         <a href="{% url 'admin_staff:products' pk=object.category.pk %}" class="card-link">&larr; к списку</a>

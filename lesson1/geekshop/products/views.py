@@ -2,9 +2,6 @@
 
 from django.shortcuts import render, get_object_or_404
 from .models import ProductCategory, Product
-from geekshop.views import getFileData
-
-from basketapp.views import get_total
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -13,12 +10,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #         data = json.load(data_file)
 #
 #     return data
-
-def get_basket(user):
-    if user.is_authenticated:
-        return user.basket.all()
-    else:
-        return []
 
 
 def get_hot_product():
@@ -38,10 +29,7 @@ def get_catalog_menu():
 
 def products(request, pk=None, page=1):
     title = 'продукты'
-    menu_items = getFileData('menu_items.json')
     page_size = 3
-
-    basket = get_total(request)
 
     if pk is not None:
         if pk == 0:
@@ -64,10 +52,8 @@ def products(request, pk=None, page=1):
         content = {
             'title': title,
             'catalog_menu': get_catalog_menu(),
-            'menu_items': menu_items,
             'category': category,
             'products': products_paginator,
-            'basket': basket
         }
 
         return render(request, 'products/products_list.html', content)
@@ -78,10 +64,8 @@ def products(request, pk=None, page=1):
     content = {
         'title': title,
         'catalog_menu': get_catalog_menu(),
-        'menu_items': menu_items,
         'hot_product': hot_product,
         'same_products': same_products,
-        'basket': basket,
     }
 
     return render(request, 'products/products.html', content)
@@ -89,15 +73,11 @@ def products(request, pk=None, page=1):
 
 def product(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    basket = get_total(request)
-    menu_items = getFileData('menu_items.json')
 
     content = {
         'title': product.name,
         'catalog_menu': get_catalog_menu(),
         'product': product,
-        'basket': basket,
-        'menu_items': menu_items,
     }
 
     return render(request, 'products/product.html', content)

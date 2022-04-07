@@ -35,7 +35,7 @@
                                     {% else %}{{ product.name }}{% endif %}
                                 </td>
                                 <td>{{ product.quantity }}</td>
-                                <td>{{ product.price|formated }} руб.</td>
+                                <td>{{ product.price|price_format }} руб.</td>
                                 <td class="text-center">
                                     {% if product.is_active %}
                                     <a href="{% url 'admin_staff:product_read' pk=product.pk %}"><i class="fa fa-search"></i></a>

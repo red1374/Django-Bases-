@@ -6,20 +6,16 @@ from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from basketapp.models import Basket
 from products.models import Product
 
-from geekshop.views import getFileData
-
-from geekshop.utils import is_ajax, get_price_formated
+from geekshop.utils import is_ajax, get_price_format
 
 
 @login_required
 def basket(request):
     title = 'корзина'
     basket_items = request.user.basket.order_by('product__category')
-    menu_items = getFileData('menu_items.json')
 
     content = {
         'title': title,
-        'menu_items': menu_items,
         'basket_items': basket_items,
         'total': get_total(request)
     }
@@ -69,7 +65,7 @@ def get_total(request):
 
     return {
         'qty': qty,
-        'sum': get_price_formated(int(sum))
+        'sum': get_price_format(int(sum))
     }
 
 
@@ -86,7 +82,7 @@ def edit(request, pk, quantity):
                 'status': 'error',
                 'basket_item': {
                     'id': int(pk),
-                    'cost': get_price_formated(cost)
+                    'cost': get_price_format(cost)
                 },
             })
 
@@ -100,7 +96,7 @@ def edit(request, pk, quantity):
         result = {
             'basket_item': {
                 'id': int(pk),
-                'cost': get_price_formated(cost)
+                'cost': get_price_format(cost)
             },
             'itog': get_total(request),
         }

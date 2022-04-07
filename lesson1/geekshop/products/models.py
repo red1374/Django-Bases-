@@ -32,7 +32,7 @@ class Product(models.Model):
 
     @property
     def get_price(self):
-        return utils.get_price_formated(self.price)
+        return utils.get_price_format(self.price)
 
 
 class TestModel(models.Model):

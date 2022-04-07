@@ -18,14 +18,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import index, contacts, uploadToBase
+from .views import index, contacts, upload_to_base
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin_staff/', include('adminapp.urls', namespace='admin_staff')),
     path('', index, name='main'),
     path('contacts/', contacts, name='contacts'),
-    path('upload/', uploadToBase, name='upload'),
+    path('upload/', upload_to_base, name='upload'),
     path('products/', include('products.urls', namespace='products')),
     path('auth/', include('authapp.urls', namespace='auth')),
     path('basket/', include('basketapp.urls', namespace='basket'))
