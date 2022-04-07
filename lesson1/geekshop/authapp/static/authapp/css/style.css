@@ -1,0 +1,34 @@
+.errorlist{position: relative; padding: 0px; list-style: none;}
+.errorlist + p input{border-color: red}
+    .errorlist li{position: relative; color: red;}
+.errorlist{
+    -webkit-animation: seconds 1.0s forwards;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-delay: 3s;
+    animation: seconds 1.0s forwards;
+    animation-iteration-count: 1;
+    animation-delay: 3s;
+}
+.user_avatar{position: relative; width: 160px; max-height: 200px; padding-bottom: 15px;}
+    .user_avatar img{width: 100%;}
+@-webkit-keyframes seconds {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    left: -9999px;
+    position: absolute;
+  }
+}
+@keyframes seconds {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    left: -9999px;
+    position: absolute;
+  }
+}
+.mw-350{max-width: 350px;}

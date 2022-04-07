@@ -2,4 +2,19 @@
     {% for item in menu_items %}
     <li><a {% if item.name == request.resolver_match.view_name %}class="active" {% endif %}href="{% url item.name %}">{{ item.title }}</a></li>
     {% endfor %}
+    {% if user.is_authenticated %}
+    <li>
+        <a href="{% url 'auth:edit' %}">
+            <i class="fa fa-user"></i>
+            {{ user.first_name|default:'Пользователь' }}
+        </a>
+    </li>
+    {% endif %}
+    <li>
+        {% if user.is_authenticated %}
+          <a href="{% url 'auth:logout' %}">выйти</a>
+        {% else %}
+          <a href="{% url 'auth:login' %}">войти</a>
+        {% endif %}
+    </li>
 </ul>
