@@ -8,12 +8,26 @@
     <li><a {% if item.name == request.resolver_match.view_name %}class="active" {% endif %}href="{% url item.name %}">{{ item.title }}</a></li>
     {% endfor %}
     {% if user.is_authenticated %}
-    <li>
-        <a href="{% url 'auth:edit' %}">
-            <i class="fa fa-user"></i>
-            {{ user.first_name|default:'Пользователь' }}
-        </a>
-    </li>
+       <li>
+           <div class="dropdown">
+               <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                   {{ user.first_name|default:'Пользователь' }}
+               </a>
+               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li>
+                       <a href="{% url 'auth:edit' %}">профиль</a>
+                    </li>
+                    <li>
+                       <a href="{% url 'ordersapp:orders_list' %}">заказы</a>
+                    </li>
+                    {% if user.is_superuser %}
+                    <li>
+                        <a href="{% url 'admin_staff:main' %}" target="_blank" class="admin_link">Админка</a>
+                    </li>
+                    {% endif %}
+               </ul>
+           </div>
+       </li>
     {% endif %}
     <li>
         {% if user.is_authenticated %}
@@ -29,6 +43,3 @@
         {% if basket and basket.qty != 0 %} {{ basket.qty }} шт.<br> {{ basket.sum }}р.{% endif %}
     </span>
 </a>
-{% if user.is_superuser %}
-<a href="{% url 'admin_staff:main' %}" target="_blank" class="admin_link">Админка</a>
-{% endif %}

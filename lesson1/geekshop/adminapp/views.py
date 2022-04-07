@@ -84,7 +84,7 @@ class UsersListView(ListView):
         context = super(UsersListView, self).get_context_data(**kwargs)
         context['title'] = 'cписок пользователей'
         context['breadcrumbs'] = get_breadcrumb()
-        context['pape_url'] = 'adminapp:users_page'
+        context['page_url'] = 'adminapp:users_page'
         return context
 
 
@@ -176,7 +176,7 @@ class ProductCategoryListView(ListView):
         context = super(ProductCategoryListView, self).get_context_data(**kwargs)
         context['title'] = 'категории товаров'
         context['breadcrumbs'] = get_breadcrumb()
-        context['pape_url'] = 'adminapp:categories_page'
+        context['page_url'] = 'adminapp:categories_page'
         return context
 
 
@@ -263,7 +263,7 @@ class ProductListView(ListView):
         context['title'] = 'Товары раздела "' + category.name + '"'
         context['category'] = category
         context['breadcrumbs'] = get_breadcrumb(('categories',))
-        context['pape_url'] = 'adminapp:products_page'
+        context['page_url'] = 'adminapp:products_page'
         context['page_pk'] = self.kwargs['pk']
         return context
 

@@ -1,19 +1,19 @@
-{% if products.paginator.num_pages > 1 %}
+{% if paginator.num_pages > 1 %}
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-        {% if products.has_previous %}
+        {% if page_obj.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="{% url 'products:page' category.pk|add:'0' products.previous_page_number %}">&larr;</a>
+                <a class="page-link" href="{% url 'products:page' category.pk|add:'0' page_obj.previous_page_number %}">&larr;</a>
             </li>
         {% endif %}
             <li class="page-item active">
                 <span class="page-link">
-                страница {{ products.number }} из {{ products.paginator.num_pages }}
+                страница {{ page_obj.number }} из {{ paginator.num_pages }}
                 </span>
             </li>
-        {% if products.has_next %}
+        {% if page_obj.has_next %}
             <li class="page-item">
-                <a class="page-link" href="{% url 'products:page' category.pk|add:'0' products.next_page_number %}">&rarr;</a>
+                <a class="page-link" href="{% url 'products:page' category.pk|add:'0' page_obj.next_page_number %}">&rarr;</a>
             </li>
         {% endif %}
         </ul>

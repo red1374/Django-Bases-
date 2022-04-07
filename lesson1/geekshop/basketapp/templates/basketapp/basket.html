@@ -5,23 +5,20 @@
 <link rel="stylesheet" href="{% static '/basketapp/css/style.css' %}">
 {% endblock %}
 {% block js %}
-    <script src="{% static '/geekshop/js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static '/basketapp/js/scripts.js' %}"></script>
 {% endblock %}
 {% block content %}
-		<div class="hero-white">
-			<div class="header clearfix">
-				{% include 'includes/menu_inc.html' %}
-			</div>
+	<div class="hero-white">
+		<div class="header clearfix">
+			{% include 'includes/menu_inc.html' %}
 		</div>
+	</div>
 	<div class="basket_container">
-		<div class="h2 text-center head">
-		  Ваша корзина,
-		  {% if user.first_name %}
-			<strong>{{ user.first_name|title}}</strong>
-		  {% else %}
-			Пользователь
-		  {% endif %}
+		<div class="h2 text-center head mt-5 mb-5">
+	  		Ваша корзина,
+		 	{% if user.first_name %}
+			<strong>{{ user.first_name|title|default:'Пользователь'}}</strong>
+		 	{% endif %}
 		</div>
 		{% if basket_items %}
 		<div class="basket_list">
@@ -42,4 +39,5 @@
 		<p class="pt-5 pb-5">В корзине пусто. Пора приступить к <a href="{% url 'products:index'%}" title="Наполнить корзину">покупкам</a></p>
 		{% endif %}
   	</div>
+	<div class="clearfix mb-5">
 {% endblock %}

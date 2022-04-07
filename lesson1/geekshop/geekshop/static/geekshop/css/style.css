@@ -55,6 +55,7 @@ html, body {
 	text-transform: uppercase;
     text-decoration: none;
 	padding: 10px 13px;
+	display: inline;
 }
 .menu .active {
 	color: #212121;
