@@ -20,6 +20,7 @@ html, body {
 	width: 1366px;
 	margin: 0 auto;
 	min-height: 100%;
+	box-sizing: initial;
 }
 
 .slider {
@@ -52,7 +53,7 @@ html, body {
 	font-weight: 700;
 	text-align: right;
 	text-transform: uppercase;
-	text-decoration: none;
+    text-decoration: none;
 	padding: 10px 13px;
 }
 .menu .active {
@@ -78,18 +79,25 @@ html, body {
 	background-image: url(/static/geekshop/img/search.png);
 	position: absolute;
 	top: 63px;
-	left: 1176px;
+	right: 130px;
 }
 .basket {
+    width: 123px;
 	display: block;
-	width: 23px;
-	height: 23px;	
-	background-image: url(/static/geekshop/img/basket.png);
+	background: transparent url('/static/geekshop/img/basket.png') no-repeat left top;
 	position: absolute;
 	top: 63px;
-	left: 1210px;
+	right: 4px;
+	padding-left: 33px;
+	text-decoration: none;
+    font-weight: 700;
+    color: #8c8c8c;
 }
-
+.basket:hover{
+    border-bottom: 3px solid #212121;
+    color: #212121;
+}
+.basket span{display: block; margin-top: -15px;}
 .clearfix:after {
 	content: "";
 	display: block;
@@ -549,6 +557,7 @@ html, body {
 	padding-right: 98px;
 	margin: -384px auto 0;
 	clear: both;
+	box-sizing: initial;
 }
 .footer form {
 	position: relative;
@@ -849,4 +858,7 @@ td:first-child {
 	padding-left: 98px;
 	padding-right: 211px;
 	position: relative;
+}
+.details, .links, .details-products, .details-slider, .description{
+    box-sizing: initial;
 }
