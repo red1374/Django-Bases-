@@ -1,5 +1,5 @@
 <ul class="menu">
     {% for item in menu_items %}
-    <li><a {% if item.name == request.resolver_match.url_name %}class="active" {% endif %}href="{% url item.name %}">{{ item.title }}</a></li>
+    <li><a {% if item.name == request.resolver_match.view_name %}class="active" {% endif %}href="{% url item.name %}">{{ item.title }}</a></li>
     {% endfor %}
 </ul>
