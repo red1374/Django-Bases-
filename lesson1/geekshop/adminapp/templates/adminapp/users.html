@@ -2,16 +2,9 @@
 {% load static %}
 
 {% block content %}
-<main>
-    <div class="container-fluid">
-        <h1 class="mt-4">Пользователи</h1>
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table mr-1"></i>
-                Пользователи
-            </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    {% include 'adminapp/includes/inc_pagination.html' %}
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
@@ -39,7 +32,7 @@
                         </tfoot>
                         <tbody>
                         {% for user in objects %}
-                            <tr {% if not user.is_active %} style="opacity: 0.5; text-decoration: line-through;" {% endif %}>
+                            <tr{% if not user.is_active %} class="deleted-item"{% endif %}>
                                 <td><a href="{% url 'admin_staff:user_update' user.id %}" style="color: dodgerblue">{{ user.username }}</a></td>
                                 <td>{{ user.first_name }}</td>
                                 <td>{{ user.last_name }}</td>
@@ -60,7 +53,7 @@
                                 </td>
                                 <td>{{ user.last_login }}</td>
                                 <td>
-                                    <a {% if not user.is_active %} class="invisible" {% endif %} href="{% url 'admin_staff:user_delete' pk=user.id %}">
+                                    <a class="delete-item-link" href="{% url 'admin_staff:user_delete' pk=user.id %}">
                                         <i class="fa fa-times-circle"></i>
                                     </a>
                                 </td>
@@ -68,6 +61,7 @@
                         {% endfor %}
                         </tbody>
                     </table>
+                    {% include 'adminapp/includes/inc_pagination.html' %}
                 </div>
             </div>
             <div class="card-footer">
@@ -75,7 +69,4 @@
                     <button class="btn btn-success">Создать пользователя</button>
                 </a>
             </div>
-        </div>
-    </div>
-</main>
 {% endblock %}

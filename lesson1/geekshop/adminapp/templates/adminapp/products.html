@@ -1,0 +1,66 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+{% load utils %}
+
+{% block content %}
+            <div class="card-body">
+                <div class="table-responsive">
+                {% if objects %}
+                    {% include 'adminapp/includes/inc_pagination.html' %}
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Наименование</th>
+                            <th>Количество</th>
+                            <th>Цена</th>
+                            <th>Просмотр</th>
+                            <th>Удалить</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Наименование</th>
+                            <th>Количество</th>
+                            <th>Цена</th>
+                            <th>Просмотр</th>
+                            <th>Удалить</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for product in objects %}
+                            <tr {% if not product.is_active %} style="opacity: 0.5;" {% endif %}>
+                                <td>
+                                    {% if product.is_active %}
+                                    <a href="{% url 'admin_staff:product_update' pk=product.pk %}">{{ product.name }}</a>
+                                    {% else %}{{ product.name }}{% endif %}
+                                </td>
+                                <td>{{ product.quantity }}</td>
+                                <td>{{ product.price|formated }} руб.</td>
+                                <td class="text-center">
+                                    {% if product.is_active %}
+                                    <a href="{% url 'admin_staff:product_read' pk=product.pk %}"><i class="fa fa-search"></i></a>
+                                    {% else %}&nbsp;{% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {% if product.is_active %}
+                                    <a class="delete-item-link" href="{% url 'admin_staff:product_delete' pk=product.pk %}">
+                                        <i class="fa fa-times-circle"></i>
+                                    </a>
+                                    {% else %}&nbsp;{% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include 'adminapp/includes/inc_pagination.html' %}
+                {% else %}
+                    <p>Список пуст</p>
+                {% endif %}
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'admin_staff:product_create' category.pk %}">
+                    <button class="btn btn-success">Создать товар</button>
+                </a>
+            </div>
+{% endblock %}

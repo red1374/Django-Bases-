@@ -26,7 +26,7 @@
 <a href="#" class="search"></a>
 <a href="{% url 'basket:view' %}" class="basket">
     <span>
-        {% if basket and basket.qty != 0 %} {{ basket.qty }} шт.<br> {{ basket.sum|floatformat:'0' }}р.{% endif %}
+        {% if basket and basket.qty != 0 %} {{ basket.qty }} шт.<br> {{ basket.sum }}р.{% endif %}
     </span>
 </a>
 {% if user.is_superuser %}

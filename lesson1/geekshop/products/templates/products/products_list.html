@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load utils %}
 {% block morecss %}
 <link rel="stylesheet" href="{% static '/products/css/style.css' %}">
 {% endblock %}
@@ -20,11 +21,14 @@
                     <h2>Категория: "{{ category.name|title }}"</h2>
                 </div>
                 <div class="clearfix mb-5"></div>
+            {% if products %}
+                {% include 'products/includes/inc_pagination.html' %}
+                <div class="clearfix mb-5"></div>
                 <div class="category-products clearfix">
                     {% for product in products %}
                     <div class="block">
                         <a href="{% url 'products:product' product.pk %}" title="{{ product.name }}">
-                            <img src="/media/{{ product.image }}" alt="{{ product.name }}">
+                            <img src="{{ product.image|media_folder_products }}" alt="{{ product.name }}">
 							<div class="text">
 								<img src="{% static '/geekshop/img/icon-hover.png' %}" alt="{{ product.name }}">
 								<h3>{{ product.category.name }}</h3>
@@ -36,8 +40,11 @@
                         </a>
                     </div>
                     {% endfor %}
-
                 </div>
+                <div class="clearfix mb-5"></div>
+                {% include 'products/includes/inc_pagination.html' %}
+                <div class="clearfix mb-5"></div>
+            {% endif %}
             </div>
         </div>
 

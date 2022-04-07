@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load utils %}
 {% block morecss %}
 <link rel="stylesheet" href="{% static '/products/css/style.css' %}">
 {% endblock %}
@@ -21,7 +22,7 @@
 			<div class="details-products">
 				<div class="details-slider">
 					<div class="slider-product">
-						<img src="/media/{{ product.image }}">
+						<img src="{{ product.image|media_folder_products }}">
 					</div>
 					<!-- <div class="slider-control">
 						<div class="block">
@@ -45,7 +46,7 @@
 				<div class="description">
 					<h3 class="big-bold">{{ product.name }}</h3>
 					<h3 class="red">{{ product.short_desc }}</h3>
-					<p class="price">{{ product.price|floatformat:'0' }}<span>руб</span></p>
+					<p class="price">{{ product.get_price }}<span>руб</span></p>
 					<a class="red-button" href="{% url 'basket:add' product.pk %}" title="{{ product.name }}">
 						заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
 					</a>

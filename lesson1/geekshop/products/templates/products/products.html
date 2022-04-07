@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load utils %}
 {% block morecss %}
 <link rel="stylesheet" href="{% static '/products/css/style.css' %}">
 {% endblock %}
@@ -21,7 +22,7 @@
 			<div class="details-products">
 				<div class="details-slider">
 					<div class="slider-product">
-						<img src="/media/{{ hot_product.image }}">
+						<img src="{{ hot_product.image|media_folder_products }}">
 					</div>
 					<!-- <div class="slider-control">
 						<div class="block">
@@ -45,7 +46,7 @@
 				<div class="description">
 					<h3 class="big-bold">{{ hot_product.name }}</h3>
 					<h3 class="red">горячее предложение</h3>
-					<p class="price">{{ hot_product.price|floatformat:'0' }}<span>руб</span></p>
+					<p class="price">{{ hot_product.get_price }}<span>руб</span></p>
 					<a href="{% url 'basket:add' hot_product.pk %}" class="red-button">
 						заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
 					</a>
@@ -63,8 +64,8 @@
 				<div class="related-products clearfix">
 					{% for item in same_products %}
 					<div class="block">
-						<a href="#">
-							<img src="/media/{{ item.image }}" alt="{{ item.name }}">
+						<a href="{% url 'products:product' item.pk %}">
+							<img src="{{ item.image|media_folder_products }}" alt="{{ item.name }}">
 							<div class="text">
 								<img src="{% static '/geekshop/img/icon-hover.png' %}" alt="img">
 								<h3>{{ item.category.name }}</h3>

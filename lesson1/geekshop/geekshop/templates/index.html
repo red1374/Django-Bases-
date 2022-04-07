@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load utils %}
 {% block content %}
 		<div class="slider">
 			<div class="header clearfix">
@@ -29,7 +30,7 @@
 					{% for product in new_products %}
 					<div class="block d-flex justify-content-around align-items-center">
 						<a class="product-item" href="{% url 'products:product' product.pk %}" title="{{ product.name }}">
-							<img src="/media/{{ product.image }}" alt="{{ product.name }}">
+							<img src="{{ product.image|media_folder_products }}" alt="{{ product.name }}">
 							<div class="text">
 								<img src="{% static '/geekshop/img/icon-hover.png' %}" alt="img">
 								<h4>{{ product.name }}</h4>
