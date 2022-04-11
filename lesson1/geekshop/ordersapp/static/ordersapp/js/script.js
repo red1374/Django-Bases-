@@ -5,6 +5,8 @@ let Order =  null;
 class COrder {
     order_total_quantity = 0;
     order_total_cost = 0;
+    price_template = '<span class="#CLASS#" data-value="#PRICE#">#PRICE_FORMATED#</span> руб'
+    row_id = 0
 
     constructor(){
         this.getSummery();
@@ -12,7 +14,21 @@ class COrder {
         this.initPlugins();
     }
 
+    getPriceHtml(price, class_name = 'field-price'){
+        if (!price){
+            return '';
+        }
+
+        return this.price_template.
+            replace('#CLASS#', class_name).
+            replace('#PRICE#', price).
+            replace('#PRICE_FORMATED#', CUtils.number_format(price, 2, ',', ' '));
+    }
+    /*
+     Set page form inputs events
+    */
     setInputEvents(){
+        /* -- Change order item quantity event ---------------------------------------------------------------------- */
         if ($('.field-quantity').length){
             $('.field-quantity').change(function(){
                 let parent_tr = $(this).parents('tr'),
@@ -26,8 +42,49 @@ class COrder {
                 Order.updateSummery();
             });
         }
+
+        /* -- Change order product event ---------------------------------------------------------------------------- */
+        if ($('.field-product').length){
+            $('.field-product').change(function(){
+                Order.row_id = $(this).parents('tr').index();
+                Order.getProductPrice(this.value);
+                $('.field-product').attr('disabled', 'disabled');
+            });
+        }
     }
 
+    /*
+    Get product price
+    */
+    getProductPrice(product_id){
+        if (!product_id){
+            return false;
+        }
+
+        $.get(
+            `/orders/product/${product_id}/price/`,
+            function(data) {
+                if (data.product_id == undefined){
+                    return false;
+                }
+                let parent_tr = $(`.formset_row:eq(${Order.row_id})`);
+                parent_tr.find('.td-price').html(Order.getPriceHtml(data.price)).
+                    find('.td-price span').data('value', data.price);
+
+                $('.field-product').removeAttr('disabled');
+                if (!$.trim(parent_tr.find('.td-summ').text())){
+                    parent_tr.find('.td-summ').html(Order.price_template).
+                        find('span').addClass('field-summ');
+                }
+                parent_tr.find('.td-quantity input').trigger('change');
+            },
+            'JSON'
+        );
+    }
+
+    /*
+     Get order summary information
+    */
     getSummery(){
         if (!$('.order_form .formset_row').length){
             return false;
@@ -48,6 +105,9 @@ class COrder {
         this.order_total_cost = total;
     }
 
+    /*
+    Update order summery information
+    */
     updateSummery(){
         this.getSummery();
 
@@ -62,6 +122,9 @@ class COrder {
         }
     }
 
+    /*
+    Init page plugins
+    */
     initPlugins(){
         if (!$('.formset_row').length){
             return false;

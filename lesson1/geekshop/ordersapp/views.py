@@ -1,5 +1,6 @@
 from django.db.models.signals import pre_save, pre_delete
 from django.dispatch import receiver
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
@@ -10,8 +11,11 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
 from basketapp.models import Basket
+from products.models import Product
 from .models import Order, OrderItem
+
 from .forms import OrderItemForm
+from geekshop.utils import is_ajax
 
 
 class OrderList(ListView):
@@ -140,3 +144,23 @@ def product_quantity_update_save(sender, update_fields, instance, **kwargs):
 def product_quantity_update_delete(sender, instance, **kwargs):
     instance.product.quantity += instance.quantity
     instance.product.save()
+
+
+def get_product_price(request, pk):
+    product_id = int(pk)
+    result = {
+        'status': 'error',
+        'product_id': product_id,
+        'price': 0,
+    }
+
+    if is_ajax(request) and product_id > 0:
+        product_item = Product.objects.filter(pk=pk).first()
+
+        if product_item is None:
+            return JsonResponse(result)
+
+        result['price'] = product_item.price
+        result['status'] = 'success'
+
+    return JsonResponse(result)
