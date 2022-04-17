@@ -8,7 +8,7 @@ environ.Env.read_env()
 
 def top_menu(request):
     menu_items = {}
-    if bool(env('DEBUG')) == False:
+    if env('DEBUG') == 'TRUE':
         menu_items = get_file_data('geekshop/json/menu_items.json')
     else:
         menu_items = get_file_data('geekshop/json/menu_items_prod.json')
