@@ -31,7 +31,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = bool(env('DEBUG'))
 
 ALLOWED_HOSTS = [
-    '178.21.8.174'
+    env('ALLOWED_HOSTS')
 ]
 
 
@@ -95,15 +95,23 @@ WSGI_APPLICATION = 'geekshop.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    #  -- Test --
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+    #  -- Prod --
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'geekshop',
+    #     'USER': 'postgres',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'geekshop',
-        'USER': 'postgres',
+        'ENGINE': env('DB_BACKEND_ENGINE'),
+        'NAME': env('DB_BASE_NAME'),
+        'USER': env('DB_USER_NAME'),
     }
+
     # 'PASSWORD': 'password',
     # 'HOST': 'db.example.com',
     # 'PORT': '5432',
@@ -177,9 +185,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "geekshop", "static"),
-)
+if DEBUG:
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, "geekshop", "static"),
+    )
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -194,7 +205,7 @@ LOGIN_URL = '/auth/login/'
 
 DOMAIN_NAME = 'http://127.0.0.1:8000'
 
-EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = '2525'
