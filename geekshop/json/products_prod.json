@@ -1,0 +1,71 @@
+[{
+    "category": "Стол",
+    "name": "Обеденный стол",
+    "image": "products_images/table.jpg",
+    "description": "",
+    "price": "2000.0",
+    "quantity":3
+},{
+    "category": "Стулья",
+    "name": "Красный стул",
+    "image": "products_images/controll2.jpg",
+    "description": "",
+    "price": "2444.00",
+    "quantity": 6
+},{
+    "category": "Лампа",
+    "name": "Зебра-лампа",
+    "image": "products_images/product-11.jpg",
+    "description": "",
+    "price": "3500.00",
+    "quantity": 78
+},{
+    "category": "Лампа",
+    "name": "Настольная лампа",
+    "image": "products_images/product-31.jpg",
+    "description": "",
+    "price": "12777.00",
+    "quantity": 67
+},{
+    "category": "Лампа",
+    "name": "Прикроватный светильник",
+    "image": "products_images/product-41.jpg",
+    "description": "",
+    "price": "1200.00",
+    "quantity": 15
+},{
+    "category": "Ваза",
+    "name": "Небольшая белая ваза",
+    "image": "products_images/product-61.jpg",
+    "description": "",
+    "price": "455.00",
+    "quantity": 12
+},{
+    "category": "Ваза",
+    "name": "Черная вазочка",
+    "image": "products_images/product-51.jpg",
+    "description": "",
+    "price": "40.00",
+    "quantity": 2
+},{
+    "category": "Стулья",
+    "name": "Синий стул",
+    "image": "products_images/controll1.jpg",
+    "description": "",
+    "price": "5800.00",
+    "quantity": 42
+},{
+    "category": "Стулья",
+    "name": "Голубой стул",
+    "image": "products_images/controll.jpg",
+    "description": "",
+    "price": "1399.00",
+    "quantity": 89
+},{
+    "category": "Стулья",
+    "name": "Белый стул",
+    "image": "products_images/product-21.jpg",
+    "description": "",
+    "price": "5888.00",
+    "quantity": 78
+}]

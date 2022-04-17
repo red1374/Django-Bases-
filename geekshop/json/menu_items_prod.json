@@ -1,0 +1,10 @@
+[{
+    "name": "main",
+    "title": "домой"
+},{
+    "name": "products:index",
+    "title": "продукты"
+},{
+    "name": "contacts",
+    "title": "контакты"
+}]

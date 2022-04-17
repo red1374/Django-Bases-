@@ -1,9 +1,20 @@
 from geekshop.utils import get_price_format, get_file_data
 
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
 
 def top_menu(request):
+    menu_items = {}
+    if bool(env('DEBUG')) == False:
+        menu_items = get_file_data('geekshop/json/menu_items.json')
+    else:
+        menu_items = get_file_data('geekshop/json/menu_items_prod.json')
+
     return {
-        'menu_items': get_file_data('menu_items.json')
+        'menu_items': menu_items
     }
 
 
