@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import user_passes_test
@@ -220,6 +221,15 @@ class ProductCategoryUpdateView(UpdateView):
             return reverse('admin_staff:category_update', args=[self.object.pk])
         else:
             return reverse('admin_staff:categories')
+
+    def form_valid(self, form):
+        if 'discount' in form.cleaned_data:
+            discount = form.cleaned_data['discount']
+
+        if discount:
+            self.object.product_set.update(price=F('price') * (1 - discount / 100))
+
+        return super().form_valid(form)
 
 
 class ProductCategoryDeleteView(DeleteView):
